@@ -28,12 +28,22 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Prepare artifact
+        run: |
+          mkdir _site
+          shopt -s dotglob
+          for item in * .nojekyll; do
+            case "$item" in
+              .|..|.git|.github|_site) continue ;;
+            esac
+            [ -e "$item" ] && cp -R "$item" _site/
+          done
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
           name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
-          include-hidden-files: true
 
       - name: Deploy to GitHub Pages
         id: deployment

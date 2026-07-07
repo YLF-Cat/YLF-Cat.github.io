@@ -1,3 +1,3 @@
-var posts=["OI2607/","icvibelua/","welcome/","suyi1st/","cspslist/","ic_test/"];function toRandomPost(){
+var posts=["icvibelua/","cspslist/","ic_test/","OI2607/","suyi1st/","welcome/"];function toRandomPost(){
     pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);
   };
